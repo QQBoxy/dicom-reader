@@ -46,9 +46,9 @@ export default function ReadTags() {
     const fileList = acceptedFiles || [];
     const files: File[] = Array.from(fileList);
 
-    setPipelinesBaseUrl(new URL('/itk/pipelines', document.location.origin).href);
+    setPipelinesBaseUrl(new URL('itk/pipelines', import.meta.url).href);
     setPipelineWorkerUrl(
-      new URL('/itk/itk-wasm-pipeline.min.worker.js', document.location.origin).href,
+      new URL('itk/itk-wasm-pipeline.min.worker.js', import.meta.url).href,
     );
 
     const { tags: tagsArr } = await readDicomTags(files[0]);
