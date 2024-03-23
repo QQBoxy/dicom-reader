@@ -2,6 +2,12 @@
 
 A free and open source tool for reading DICOM Tags.
 
-The DICOM meta table is referenced from [DICOM Tags.csv](https://github.com/khvu/DICOM-Reader/blob/master/DICOM_Reader/DICOM%20Tags.csv).
+## Get DICOM tags library
+
+Execute the crawler script to get the latest version of DICOM tags library from the [6 Registry of DICOM Data Elements](https://dicom.nema.org/medical/dicom/current/output/chtml/part06/chapter_6.html).
+
+```bash
+yarn crawler
+```
 
 Made by QQBoxy.

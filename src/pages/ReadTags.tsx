@@ -16,8 +16,8 @@ import Typography from '@mui/material/Typography';
 import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import dicomTagsLibrary from '../utils/dicomTagsLibrary.json';
-const dicomTags: DicomTags = dicomTagsLibrary;
+import dicomTagsJson from '../assets/libraries/dicomTags.json';
+const dicomTags: DicomTags = dicomTagsJson;
 
 import Layout from '../components/Layout';
 
@@ -46,15 +46,20 @@ export default function ReadTags() {
     const fileList = acceptedFiles || [];
     const files: File[] = Array.from(fileList);
 
-    setPipelinesBaseUrl(new URL('itk/pipelines', import.meta.url).href);
+    setPipelinesBaseUrl(
+      new URL(`${import.meta.env.BASE_URL}itk/pipelines`, document.location.origin).href,
+    );
     setPipelineWorkerUrl(
-      new URL('itk/itk-wasm-pipeline.min.worker.js', import.meta.url).href,
+      new URL(
+        `${import.meta.env.BASE_URL}itk/itk-wasm-pipeline.min.worker.js`,
+        document.location.origin,
+      ).href,
     );
 
     const { tags: tagsArr } = await readDicomTags(files[0]);
 
     const tags = tagsArr.map((item) => {
-      const tag = item[0];
+      const tag = item[0].toUpperCase();
       return {
         tag: tag,
         ...dicomTags[tag],
